@@ -1,0 +1,33 @@
+{
+  "name": "stock-query-project",
+  "version": "1.0.0",
+  "description": "股票信息查询系统 - 基于Next.js前端和Python后端",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python app.py",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && pip install -r requirements.txt",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && flake8 .",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend && npm test",
+    "test:backend": "cd backend && python -m pytest"
+  },
+  "keywords": [
+    "stock",
+    "finance",
+ "next.js",
+    "python",
+    "flask",
+    "yahoo-finance"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

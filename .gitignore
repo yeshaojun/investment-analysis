@@ -1,0 +1,78 @@
+# 依赖
+node_modules/
+.pnp
+.pnp.js
+
+test_*.py
+test_*.sh
+
+# 测试
+coverage/
+
+# Next.js
+.next/
+out/
+build
+
+# 环境变量
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# 日志
+*.log
+
+# 数据库
+*.db
+*.sqlite3
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 项目临时文件
+data/database/
+data/exports/
+*.tmp
+*.temp
