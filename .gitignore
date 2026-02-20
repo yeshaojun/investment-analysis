@@ -8,6 +8,7 @@ test_*.sh
 
 # 测试
 coverage/
+backend/.env
 
 # Next.js
 .next/
