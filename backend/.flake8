@@ -1,0 +1,7 @@
+[flake8]
+max-line-length = 120
+exclude = __pycache__,.pytest_cache,tests
+per-file-ignores =
+    tests/*:F401
+    infra/technical_indicators.py:E501
+ignore = W293,W292,E302,E305
