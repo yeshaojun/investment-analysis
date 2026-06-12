@@ -16,6 +16,13 @@ from flask_cors import CORS
 import config
 from api.routes.stock import stock_bp
 from api.routes.market import market_bp
+from api.routes.chain import chain_bp
+from api.routes.watchlist import watchlist_bp
+from api.routes.thesis import thesis_bp
+from api.routes.calendar import calendar_bp
+from api.routes.morning_note import morning_note_bp
+from api.routes.screener import screener_bp
+from api.routes.news import news_bp
 from infra.cache import cache
 from api.response import server_error_response, success_response
 
@@ -44,6 +51,13 @@ CORS(app)
 
 app.register_blueprint(stock_bp)
 app.register_blueprint(market_bp)
+app.register_blueprint(chain_bp)
+app.register_blueprint(watchlist_bp)
+app.register_blueprint(thesis_bp)
+app.register_blueprint(calendar_bp)
+app.register_blueprint(morning_note_bp)
+app.register_blueprint(screener_bp)
+app.register_blueprint(news_bp)
 
 
 # ---------------------------------------------------------------------------

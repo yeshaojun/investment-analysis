@@ -1,0 +1,272 @@
+{
+  "snapshot_id": "3fa5f2f1-54fd-41de-bd80-51236b69605b",
+  "event_text": "NVIDIA宣布增加资本开支用于AI服务器采购",
+  "normalized_event_type": "capex_increase",
+  "event_date": "2024-01-15T00:00:00",
+  "classification_confidence_band": "high",
+  "rules_version": "1.0.0",
+  "chain_data_version": "1.0.0",
+  "financial_data_as_of": "2026-06-11T18:29:14.240829",
+  "result_json": {
+    "classification": {
+      "event_type": "capex_increase",
+      "confidence_band": "high",
+      "matched_keyword": "资本开支",
+      "method": "keyword_match"
+    },
+    "impact": {
+      "event_type": "capex_increase",
+      "affected_nodes": [
+        {
+          "node_id": "optical-modules",
+          "chain_id": "ai-compute",
+          "name": "Optical Modules",
+          "level": "L1",
+          "description": "High-speed optical transceivers for data centers",
+          "exposed_companies": [
+            {
+              "company_id": "inno-light",
+              "symbol": "300308",
+              "exchange": "SZ",
+              "canonical_name": "中际旭创股份有限公司",
+              "aliases": [
+                "中际旭创",
+                "InnoLight"
+              ],
+              "exposure_details": {
+                "exposure_id": "inno-light-optical",
+                "company_id": "inno-light",
+                "node_id": "optical-modules",
+                "chain_id": "ai-compute",
+                "role": "光模块厂商",
+                "exposure_band": "high",
+                "business_scope": "生产高速光模块",
+                "evidence_tier": "primary_fact",
+                "relationship_status": "verified",
+                "evidence_as_of": "2024-01-01",
+                "last_seen_date": "2024-01-01",
+                "staleness_status": "fresh",
+                "review_required_after": "2025-01-01",
+                "effective_from": "2024-01-01",
+                "effective_to": null
+              }
+            },
+            {
+              "company_id": "eoptolink",
+              "symbol": "300502",
+              "exchange": "SZ",
+              "canonical_name": "新易盛通信技术股份有限公司",
+              "aliases": [
+                "新易盛",
+                "Eoptolink"
+              ],
+              "exposure_details": {
+                "exposure_id": "eoptolink-optical",
+                "company_id": "eoptolink",
+                "node_id": "optical-modules",
+                "chain_id": "ai-compute",
+                "role": "光模块厂商",
+                "exposure_band": "high",
+                "business_scope": "生产高速光模块",
+                "evidence_tier": "primary_fact",
+                "relationship_status": "verified",
+                "evidence_as_of": "2024-01-01",
+                "last_seen_date": "2024-01-01",
+                "staleness_status": "fresh",
+                "review_required_after": "2025-01-01",
+                "effective_from": "2024-01-01",
+                "effective_to": null
+              }
+            }
+          ]
+        },
+        {
+          "node_id": "server-systems",
+          "chain_id": "ai-compute",
+          "name": "Server Systems",
+          "level": "L1",
+          "description": "AI server system assembly and integration",
+          "exposed_companies": [
+            {
+              "company_id": "sugon",
+              "symbol": "603019",
+              "exchange": "SH",
+              "canonical_name": "中科曙光股份有限公司",
+              "aliases": [
+                "中科曙光",
+                "Sugon"
+              ],
+              "exposure_details": {
+                "exposure_id": "sugon-server",
+                "company_id": "sugon",
+                "node_id": "server-systems",
+                "chain_id": "ai-compute",
+                "role": "服务器厂商",
+                "exposure_band": "high",
+                "business_scope": "生产AI服务器系统",
+                "evidence_tier": "primary_fact",
+                "relationship_status": "verified",
+                "evidence_as_of": "2024-01-01",
+                "last_seen_date": "2024-01-01",
+                "staleness_status": "fresh",
+                "review_required_after": "2025-01-01",
+                "effective_from": "2024-01-01",
+                "effective_to": null
+              }
+            },
+            {
+              "company_id": "inspur",
+              "symbol": "000977",
+              "exchange": "SZ",
+              "canonical_name": "浪潮电子信息产业股份有限公司",
+              "aliases": [
+                "浪潮信息",
+                "Inspur"
+              ],
+              "exposure_details": {
+                "exposure_id": "inspur-server",
+                "company_id": "inspur",
+                "node_id": "server-systems",
+                "chain_id": "ai-compute",
+                "role": "服务器厂商",
+                "exposure_band": "high",
+                "business_scope": "生产AI服务器系统",
+                "evidence_tier": "primary_fact",
+                "relationship_status": "verified",
+                "evidence_as_of": "2024-01-01",
+                "last_seen_date": "2024-01-01",
+                "staleness_status": "fresh",
+                "review_required_after": "2025-01-01",
+                "effective_from": "2024-01-01",
+                "effective_to": null
+              }
+            }
+          ]
+        },
+        {
+          "node_id": "800g-optical",
+          "chain_id": "ai-compute",
+          "name": "800G Optical Modules",
+          "level": "L2",
+          "description": "800G high-speed optical transceivers",
+          "exposed_companies": []
+        },
+        {
+          "node_id": "ai-server",
+          "chain_id": "ai-compute",
+          "name": "AI Server",
+          "level": "L2",
+          "description": "Servers specifically designed for AI workloads",
+          "exposed_companies": []
+        }
+      ],
+      "impact_paths": [
+        {
+          "rule_id": "capex-increase-server",
+          "event_type": "capex_increase",
+          "impact_direction": "positive",
+          "impact_level": "high",
+          "strength_band": "strong",
+          "confidence_band": "high",
+          "affected_node_ids": [
+            "server-systems",
+            "ai-server"
+          ],
+          "time_lag_days": 90,
+          "rationale": "资本开支增加通常意味着服务器采购增加"
+        },
+        {
+          "rule_id": "capex-increase-optical",
+          "event_type": "capex_increase",
+          "impact_direction": "positive",
+          "impact_level": "medium",
+          "strength_band": "moderate",
+          "confidence_band": "medium",
+          "affected_node_ids": [
+            "optical-modules",
+            "800g-optical"
+          ],
+          "time_lag_days": 60,
+          "rationale": "资本开支增加带动光模块需求"
+        }
+      ],
+      "affected_node_count": 4,
+      "rule_count": 2
+    },
+    "fundamental_validation": {
+      "300308": {
+        "status": "validated",
+        "symbol": "300308",
+        "signals": {
+          "revenue_yoy": 192.116909,
+          "revenue_trend": "positive",
+          "profit_yoy": 262.283657,
+          "profit_trend": "positive",
+          "net_margin": 29.41,
+          "margin_direction": "positive",
+          "operating_cash_flow": 3367573676.62,
+          "cash_flow_quality": "positive",
+          "data_available": true,
+          "report_year": 2026,
+          "report_quarter": 1
+        },
+        "validated_at": "2026-06-11T18:29:14.240203"
+      },
+      "300502": {
+        "status": "validated",
+        "symbol": "300502",
+        "signals": {
+          "revenue_yoy": 105.759481,
+          "revenue_trend": "positive",
+          "profit_yoy": 76.799832,
+          "profit_trend": "positive",
+          "net_margin": 33.34,
+          "margin_direction": "positive",
+          "operating_cash_flow": 684071355.88,
+          "cash_flow_quality": "positive",
+          "data_available": true,
+          "report_year": 2026,
+          "report_quarter": 1
+        },
+        "validated_at": "2026-06-11T18:29:14.240454"
+      },
+      "603019": {
+        "status": "validated",
+        "symbol": "603019",
+        "signals": {
+          "revenue_yoy": 23.710049,
+          "revenue_trend": "positive",
+          "profit_yoy": 22.186116,
+          "profit_trend": "positive",
+          "net_margin": 7.12,
+          "margin_direction": "positive",
+          "operating_cash_flow": -1390698665.3,
+          "cash_flow_quality": "negative",
+          "data_available": true,
+          "report_year": 2026,
+          "report_quarter": 1
+        },
+        "validated_at": "2026-06-11T18:29:14.240641"
+      },
+      "000977": {
+        "status": "partially_validated",
+        "symbol": "000977",
+        "signals": {
+          "revenue_yoy": -24.303121,
+          "revenue_trend": "negative",
+          "profit_yoy": 30.737077,
+          "profit_trend": "positive",
+          "net_margin": 1.71,
+          "margin_direction": "positive",
+          "operating_cash_flow": -7771612162.74,
+          "cash_flow_quality": "negative",
+          "data_available": true,
+          "report_year": 2026,
+          "report_quarter": 1
+        },
+        "validated_at": "2026-06-11T18:29:14.240810"
+      }
+    }
+  },
+  "created_at": "2026-06-11T18:29:14.240831"
+}

@@ -1,0 +1,534 @@
+[
+  {
+    "company_id": "nvidia-china",
+    "symbol": "NVDA",
+    "exchange": "US",
+    "canonical_name": "NVIDIA Corporation",
+    "aliases": [
+      "英伟达",
+      "NVDA"
+    ]
+  },
+  {
+    "company_id": "huawei",
+    "symbol": "未上市",
+    "exchange": "CN",
+    "canonical_name": "华为技术有限公司",
+    "aliases": [
+      "华为",
+      "Huawei"
+    ]
+  },
+  {
+    "company_id": "cambricon",
+    "symbol": "688256",
+    "exchange": "SH",
+    "canonical_name": "寒武纪科技股份有限公司",
+    "aliases": [
+      "寒武纪",
+      "Cambricon"
+    ]
+  },
+  {
+    "company_id": "sugon",
+    "symbol": "603019",
+    "exchange": "SH",
+    "canonical_name": "中科曙光股份有限公司",
+    "aliases": [
+      "中科曙光",
+      "Sugon"
+    ]
+  },
+  {
+    "company_id": "inspur",
+    "symbol": "000977",
+    "exchange": "SZ",
+    "canonical_name": "浪潮电子信息产业股份有限公司",
+    "aliases": [
+      "浪潮信息",
+      "Inspur"
+    ]
+  },
+  {
+    "company_id": "lenovo",
+    "symbol": "000992",
+    "exchange": "SZ",
+    "canonical_name": "联想集团有限公司",
+    "aliases": [
+      "联想集团",
+      "Lenovo"
+    ]
+  },
+  {
+    "company_id": "hisilicon",
+    "symbol": "未上市",
+    "exchange": "CN",
+    "canonical_name": "海思半导体有限公司",
+    "aliases": [
+      "海思",
+      "HiSilicon"
+    ]
+  },
+  {
+    "company_id": "zhongying",
+    "symbol": "688256",
+    "exchange": "SH",
+    "canonical_name": "中颖电子股份有限公司",
+    "aliases": [
+      "中颖电子"
+    ]
+  },
+  {
+    "company_id": "inno-light",
+    "symbol": "300308",
+    "exchange": "SZ",
+    "canonical_name": "中际旭创股份有限公司",
+    "aliases": [
+      "中际旭创",
+      "InnoLight"
+    ]
+  },
+  {
+    "company_id": "eoptolink",
+    "symbol": "300502",
+    "exchange": "SZ",
+    "canonical_name": "新易盛通信技术股份有限公司",
+    "aliases": [
+      "新易盛",
+      "Eoptolink"
+    ]
+  },
+  {
+    "company_id": "hgenuine",
+    "symbol": "300502",
+    "exchange": "SZ",
+    "canonical_name": "光迅科技股份有限公司",
+    "aliases": [
+      "光迅科技",
+      "HGenuine"
+    ]
+  },
+  {
+    "company_id": "zhongji",
+    "symbol": "002281",
+    "exchange": "SZ",
+    "canonical_name": "光迅科技股份有限公司",
+    "aliases": [
+      "光迅科技"
+    ]
+  },
+  {
+    "company_id": "jiuzhou",
+    "symbol": "300394",
+    "exchange": "SZ",
+    "canonical_name": "天孚通信股份有限公司",
+    "aliases": [
+      "天孚通信",
+      "Jiuzhou"
+    ]
+  },
+  {
+    "company_id": "shennan",
+    "symbol": "002916",
+    "exchange": "SZ",
+    "canonical_name": "深南电路股份有限公司",
+    "aliases": [
+      "深南电路",
+      "Shennan"
+    ]
+  },
+  {
+    "company_id": "suzhou",
+    "symbol": "002463",
+    "exchange": "SZ",
+    "canonical_name": "沪电股份有限公司",
+    "aliases": [
+      "沪电股份",
+      "Suzhou"
+    ]
+  },
+  {
+    "company_id": "tianyi",
+    "symbol": "002463",
+    "exchange": "SZ",
+    "canonical_name": "生益科技股份有限公司",
+    "aliases": [
+      "生益科技",
+      "Tianyi"
+    ]
+  },
+  {
+    "company_id": "dpc",
+    "symbol": "300820",
+    "exchange": "SZ",
+    "canonical_name": "英维克科技股份有限公司",
+    "aliases": [
+      "英维克",
+      "DPC"
+    ]
+  },
+  {
+    "company_id": "green",
+    "symbol": "300820",
+    "exchange": "SZ",
+    "canonical_name": "佳力图股份有限公司",
+    "aliases": [
+      "佳力图",
+      "Green"
+    ]
+  },
+  {
+    "company_id": "chi",
+    "symbol": "300820",
+    "exchange": "SZ",
+    "canonical_name": "依米康科技股份有限公司",
+    "aliases": [
+      "依米康",
+      "Chi"
+    ]
+  },
+  {
+    "company_id": "kstar",
+    "symbol": "002335",
+    "exchange": "SZ",
+    "canonical_name": "科华数据股份有限公司",
+    "aliases": [
+      "科华数据",
+      "Kstar"
+    ]
+  },
+  {
+    "company_id": "east",
+    "symbol": "002335",
+    "exchange": "SZ",
+    "canonical_name": "科士达科技股份有限公司",
+    "aliases": [
+      "科士达",
+      "East"
+    ]
+  },
+  {
+    "company_id": "voltronic",
+    "symbol": "002335",
+    "exchange": "SZ",
+    "canonical_name": "维谛技术有限公司",
+    "aliases": [
+      "维谛技术",
+      "Voltronic"
+    ]
+  },
+  {
+    "company_id": "gds",
+    "symbol": "300383",
+    "exchange": "SZ",
+    "canonical_name": "光环新网科技股份有限公司",
+    "aliases": [
+      "光环新网",
+      "GDS"
+    ]
+  },
+  {
+    "company_id": "21vianet",
+    "symbol": "300383",
+    "exchange": "SZ",
+    "canonical_name": "世纪互联集团股份有限公司",
+    "aliases": [
+      "世纪互联",
+      "21Vianet"
+    ]
+  },
+  {
+    "company_id": "chinadata",
+    "symbol": "300383",
+    "exchange": "SZ",
+    "canonical_name": "数据港股份有限公司",
+    "aliases": [
+      "数据港",
+      "Chinadata"
+    ]
+  },
+  {
+    "company_id": "suning",
+    "symbol": "002024",
+    "exchange": "SZ",
+    "canonical_name": "苏宁易购集团股份有限公司",
+    "aliases": [
+      "苏宁易购",
+      "Suning"
+    ]
+  },
+  {
+    "company_id": "jd",
+    "symbol": "JD",
+    "exchange": "US",
+    "canonical_name": "京东集团股份有限公司",
+    "aliases": [
+      "京东",
+      "JD"
+    ]
+  },
+  {
+    "company_id": "alibaba",
+    "symbol": "BABA",
+    "exchange": "US",
+    "canonical_name": "阿里巴巴集团控股有限公司",
+    "aliases": [
+      "阿里巴巴",
+      "Alibaba"
+    ]
+  },
+  {
+    "company_id": "tencent",
+    "symbol": "0700",
+    "exchange": "HK",
+    "canonical_name": "腾讯控股有限公司",
+    "aliases": [
+      "腾讯",
+      "Tencent"
+    ]
+  },
+  {
+    "company_id": "baidu",
+    "symbol": "BIDU",
+    "exchange": "US",
+    "canonical_name": "百度集团股份有限公司",
+    "aliases": [
+      "百度",
+      "Baidu"
+    ]
+  },
+  {
+    "company_id": "bytedance",
+    "symbol": "未上市",
+    "exchange": "CN",
+    "canonical_name": "字节跳动有限公司",
+    "aliases": [
+      "字节跳动",
+      "ByteDance"
+    ]
+  },
+  {
+    "company_id": "netease",
+    "symbol": "NTES",
+    "exchange": "US",
+    "canonical_name": "网易集团股份有限公司",
+    "aliases": [
+      "网易",
+      "NetEase"
+    ]
+  },
+  {
+    "company_id": "bilibili",
+    "symbol": "BILI",
+    "exchange": "US",
+    "canonical_name": "哔哩哔哩股份有限公司",
+    "aliases": [
+      "哔哩哔哩",
+      "Bilibili"
+    ]
+  },
+  {
+    "company_id": "meituan",
+    "symbol": "3690",
+    "exchange": "HK",
+    "canonical_name": "美团有限公司",
+    "aliases": [
+      "美团",
+      "Meituan"
+    ]
+  },
+  {
+    "company_id": "pdd",
+    "symbol": "PDD",
+    "exchange": "US",
+    "canonical_name": "拼多多控股公司",
+    "aliases": [
+      "拼多多",
+      "PDD"
+    ]
+  },
+  {
+    "company_id": "xiaomi",
+    "symbol": "1810",
+    "exchange": "HK",
+    "canonical_name": "小米集团有限公司",
+    "aliases": [
+      "小米",
+      "Xiaomi"
+    ]
+  },
+  {
+    "company_id": "oppo",
+    "symbol": "未上市",
+    "exchange": "CN",
+    "canonical_name": "广东欧加控股有限公司",
+    "aliases": [
+      "OPPO",
+      "Oppo"
+    ]
+  },
+  {
+    "company_id": "vivo",
+    "symbol": "未上市",
+    "exchange": "CN",
+    "canonical_name": "维沃移动通信有限公司",
+    "aliases": [
+      "vivo",
+      "Vivo"
+    ]
+  },
+  {
+    "company_id": "honor",
+    "symbol": "未上市",
+    "exchange": "CN",
+    "canonical_name": "荣耀终端有限公司",
+    "aliases": [
+      "荣耀",
+      "Honor"
+    ]
+  },
+  {
+    "company_id": "synopsys",
+    "symbol": "SNPS",
+    "exchange": "US",
+    "canonical_name": "Synopsys Inc",
+    "aliases": [
+      "新思科技"
+    ]
+  },
+  {
+    "company_id": "cadence",
+    "symbol": "CDNS",
+    "exchange": "US",
+    "canonical_name": "Cadence Design Systems",
+    "aliases": [
+      "楷登电子"
+    ]
+  },
+  {
+    "company_id": "arm",
+    "symbol": "ARM",
+    "exchange": "US",
+    "canonical_name": "Arm Holdings",
+    "aliases": [
+      "ARM控股"
+    ]
+  },
+  {
+    "company_id": "asml",
+    "symbol": "ASML",
+    "exchange": "US",
+    "canonical_name": "ASML Holding",
+    "aliases": [
+      "阿斯麦"
+    ]
+  },
+  {
+    "company_id": "applied-materials",
+    "symbol": "AMAT",
+    "exchange": "US",
+    "canonical_name": "Applied Materials",
+    "aliases": [
+      "应用材料"
+    ]
+  },
+  {
+    "company_id": "lam-research",
+    "symbol": "LRCX",
+    "exchange": "US",
+    "canonical_name": "Lam Research",
+    "aliases": [
+      "泛林集团"
+    ]
+  },
+  {
+    "company_id": "shin-etsu",
+    "symbol": "4063",
+    "exchange": "JP",
+    "canonical_name": "Shin-Etsu Chemical",
+    "aliases": [
+      "信越化学"
+    ]
+  },
+  {
+    "company_id": "sumco",
+    "symbol": "3436",
+    "exchange": "JP",
+    "canonical_name": "SUMCO Corp",
+    "aliases": [
+      "胜高"
+    ]
+  },
+  {
+    "company_id": "guangxun-keji",
+    "symbol": "002281",
+    "exchange": "SZ",
+    "canonical_name": "武汉光迅科技股份有限公司",
+    "aliases": [
+      "光迅科技"
+    ]
+  },
+  {
+    "company_id": "jian-tao",
+    "symbol": "001888",
+    "exchange": "SZ",
+    "canonical_name": "建滔集团有限公司",
+    "aliases": [
+      "建滔"
+    ]
+  },
+  {
+    "company_id": "shengyi-keji",
+    "symbol": "600183",
+    "exchange": "SH",
+    "canonical_name": "生益科技股份有限公司",
+    "aliases": [
+      "生益科技"
+    ]
+  },
+  {
+    "company_id": "nuode-gufen",
+    "symbol": "600110",
+    "exchange": "SH",
+    "canonical_name": "诺德投资股份有限公司",
+    "aliases": [
+      "诺德股份"
+    ]
+  },
+  {
+    "company_id": "jiayuan-keji",
+    "symbol": "688388",
+    "exchange": "SH",
+    "canonical_name": "嘉元科技股份有限公司",
+    "aliases": [
+      "嘉元科技"
+    ]
+  },
+  {
+    "company_id": "yingfeiling",
+    "symbol": "IFX",
+    "exchange": "US",
+    "canonical_name": "Infineon Technologies",
+    "aliases": [
+      "英飞凌"
+    ]
+  },
+  {
+    "company_id": "byd-semiconductor",
+    "symbol": "002594",
+    "exchange": "SZ",
+    "canonical_name": "比亚迪半导体股份有限公司",
+    "aliases": [
+      "比亚迪半导体"
+    ]
+  },
+  {
+    "company_id": "shuanghong",
+    "symbol": "3324",
+    "exchange": "TW",
+    "canonical_name": "双鸿科技股份有限公司",
+    "aliases": [
+      "双鸿"
+    ]
+  }
+]

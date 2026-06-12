@@ -281,3 +281,87 @@ async def ai_research_summary(symbol: str):
     except Exception as exc:
         logger.error("ai_research_summary %s: %s", symbol, exc)
         return server_error_response(str(exc))
+
+
+# ---------------------------------------------------------------------------
+# Independent AI analysis endpoints
+# ---------------------------------------------------------------------------
+
+@stock_bp.route("/api/ai/analyze/sector/<symbol>", methods=["GET"])
+async def ai_analyze_sector(symbol: str):
+    try:
+        stock_info = stock_service.get_stock_info(symbol)
+        result = await ai_service.analyze_sector(symbol, stock_info)
+        return success_response(data={"symbol": symbol, "analysis": result})
+    except Exception as exc:
+        logger.error("ai_analyze_sector %s: %s", symbol, exc)
+        return server_error_response(str(exc))
+
+
+@stock_bp.route("/api/ai/analyze/financials/<symbol>", methods=["GET"])
+async def ai_analyze_financials(symbol: str):
+    try:
+        stock_info = stock_service.get_stock_info(symbol)
+        financial_data = stock_service.get_financial_data(symbol)
+        result = await ai_service.analyze_financials(symbol, stock_info, financial_data)
+        return success_response(data={"symbol": symbol, "analysis": result})
+    except Exception as exc:
+        logger.error("ai_analyze_financials %s: %s", symbol, exc)
+        return server_error_response(str(exc))
+
+
+@stock_bp.route("/api/ai/analyze/valuation/<symbol>", methods=["GET"])
+async def ai_analyze_valuation(symbol: str):
+    try:
+        stock_info = stock_service.get_stock_info(symbol)
+        financial_data = stock_service.get_financial_data(symbol)
+        result = await ai_service.analyze_valuation(symbol, stock_info, financial_data)
+        return success_response(data={"symbol": symbol, "analysis": result})
+    except Exception as exc:
+        logger.error("ai_analyze_valuation %s: %s", symbol, exc)
+        return server_error_response(str(exc))
+
+
+@stock_bp.route("/api/ai/analyze/thesis/<symbol>", methods=["GET"])
+async def ai_analyze_thesis(symbol: str):
+    try:
+        stock_info = stock_service.get_stock_info(symbol)
+        financial_data = stock_service.get_financial_data(symbol)
+        result = await ai_service.build_thesis_analysis(symbol, stock_info, financial_data)
+        return success_response(data={"symbol": symbol, "analysis": result})
+    except Exception as exc:
+        logger.error("ai_analyze_thesis %s: %s", symbol, exc)
+        return server_error_response(str(exc))
+
+
+# ---------------------------------------------------------------------------
+# Earnings preview
+# ---------------------------------------------------------------------------
+
+_earnings_preview_cache = {}
+
+
+@stock_bp.route("/api/ai/earnings-preview", methods=["POST"])
+async def ai_earnings_preview():
+    try:
+        body = request.get_json()
+        if not body or "symbol" not in body or "quarter" not in body:
+            return bad_request_response("symbol 和 quarter 是必需的")
+        symbol = body["symbol"]
+        quarter = body["quarter"]
+        cache_key = f"{symbol}:{quarter}"
+        cached = _earnings_preview_cache.get(cache_key)
+        if cached:
+            import time
+            if time.time() - cached.get("_ts", 0) < 86400:
+                return success_response(data=cached)
+        stock_info = stock_service.get_stock_info(symbol)
+        result = await ai_service.generate_earnings_preview(symbol, stock_info, quarter)
+        if "error" not in result:
+            import time
+            result["_ts"] = time.time()
+            _earnings_preview_cache[cache_key] = result
+        return success_response(data=result)
+    except Exception as exc:
+        logger.error("ai_earnings_preview: %s", exc)
+        return server_error_response(str(exc))

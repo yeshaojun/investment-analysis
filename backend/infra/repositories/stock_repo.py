@@ -27,6 +27,7 @@ class StockRepository:
 
     def _init_schema(self) -> None:
         with sqlite3.connect(self._db) as conn:
+            conn.execute("PRAGMA journal_mode=WAL")
             conn.executescript("""
                 CREATE TABLE IF NOT EXISTS stock_info (
                     symbol TEXT PRIMARY KEY,

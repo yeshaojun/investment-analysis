@@ -2,11 +2,16 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, LineChart } from 'lucide-react'
+import { Home, LineChart, Monitor, Calendar, Newspaper, Star, Rss } from 'lucide-react'
 import { Suspense } from 'react'
 
 const navItems = [
   { path: '/', label: '股票工作台', icon: Home },
+  { path: '/watchlist', label: '关注', icon: Star },
+  { path: '/news', label: '新闻', icon: Rss },
+  { path: '/screen', label: '选股', icon: Monitor },
+  { path: '/calendar', label: '日历', icon: Calendar },
+  { path: '/morning-note', label: '早报', icon: Newspaper },
 ]
 
 function useIsActive() {

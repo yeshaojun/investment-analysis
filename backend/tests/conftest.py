@@ -3,10 +3,10 @@ Shared fixtures for all tests.
 """
 
 import pytest
+import os
 
 # Ensure backend root is on the path for all test modules
 import sys
-import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 

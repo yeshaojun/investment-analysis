@@ -1,0 +1,137 @@
+[
+  {
+    "evidence_id": "nvidia-gpu-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "NVIDIA官方财报",
+    "content": "NVIDIA设计并销售高端AI GPU芯片",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "huawei-ascend-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "华为官方发布",
+    "content": "华为设计昇腾系列AI芯片",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "cambricon-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "寒武纪官方财报",
+    "content": "寒武纪设计AI芯片",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "sugon-server-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "中科曙光官方财报",
+    "content": "中科曙光生产AI服务器",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "inspur-server-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "浪潮信息官方财报",
+    "content": "浪潮信息生产AI服务器",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "inno-light-optical-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "中际旭创官方财报",
+    "content": "中际旭创生产高速光模块",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "eoptolink-optical-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "新易盛官方财报",
+    "content": "新易盛生产高速光模块",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "shennan-pcb-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "深南电路官方财报",
+    "content": "深南电路生产高层数PCB",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "suzhou-pcb-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "沪电股份官方财报",
+    "content": "沪电股份生产高层数PCB",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "dpc-liquid-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "英维克官方财报",
+    "content": "英维克生产液冷散热系统",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "kstar-power-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "科华数据官方财报",
+    "content": "科华数据生产UPS和电源系统",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "gds-idc-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "光环新网官方财报",
+    "content": "光环新网运营数据中心",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "alibaba-idc-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "阿里巴巴官方财报",
+    "content": "阿里巴巴运营阿里云数据中心",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "tencent-idc-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "腾讯官方财报",
+    "content": "腾讯运营腾讯云数据中心",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  },
+  {
+    "evidence_id": "baidu-idc-primary",
+    "chain_id": "ai-compute",
+    "source_type": "primary_fact",
+    "source_reference": "百度官方财报",
+    "content": "百度运营百度云数据中心",
+    "confidence_band": "high",
+    "effective_date": "2024-01-01"
+  }
+]

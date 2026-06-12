@@ -1,11 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { Activity, BarChart3, FileText, LineChart, Sparkles, WalletCards } from 'lucide-react'
+import { Activity, BarChart3, FileText, LineChart, Sparkles, WalletCards, Target, TrendingUp } from 'lucide-react'
 import { CardSkeleton } from '@/src/components/base/Loading'
 import { SearchBar } from '@/src/components/search/SearchBar'
 import { StockCard } from '@/src/components/stock/StockCard'
 import { FinancialDataCard } from '@/src/components/stock/FinancialDataCard'
+import { ChainPositionCard } from '@/src/components/stock/ChainPositionCard'
+import { WatchlistButton } from '@/src/components/stock/WatchlistButton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs'
 import { useStockStore } from '@/src/stores/stockStore'
 
@@ -25,6 +27,14 @@ const InvestmentValueCard = dynamic(
   () => import('@/src/components/stock/InvestmentValueCard').then(m => m.InvestmentValueCard),
   { loading: () => <CardSkeleton />, ssr: false }
 )
+const ThesisTracker = dynamic(
+  () => import('@/src/components/stock/ThesisTracker').then(m => m.ThesisTracker),
+  { loading: () => <CardSkeleton />, ssr: false }
+)
+const EarningsPreview = dynamic(
+  () => import('@/src/components/stock/EarningsPreview').then(m => m.EarningsPreview),
+  { loading: () => <CardSkeleton />, ssr: false }
+)
 
 export function StockExplorer() {
   const selectedStock = useStockStore((s) => s.selectedSymbol)
@@ -41,7 +51,11 @@ export function StockExplorer() {
       {selectedStock ? (
         <Tabs defaultValue="overview" className="space-y-4">
           <div className="sticky top-14 z-40 -mx-4 border-y border-slate-200/80 bg-white/90 px-4 py-3 shadow-sm backdrop-blur-xl md:static md:mx-0 md:rounded-xl md:border">
-            <TabsList className="grid h-auto w-full grid-cols-5 gap-1 overflow-x-auto rounded-lg bg-slate-100 p-1">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-slate-700">{selectedStock}</span>
+              <WatchlistButton symbol={selectedStock} />
+            </div>
+            <TabsList className="grid h-auto w-full grid-cols-8 gap-1 overflow-x-auto rounded-lg bg-slate-100 p-1">
               <TabsTrigger value="overview" className="gap-1.5 px-2 py-2 text-xs md:text-sm">
                 <WalletCards className="h-3.5 w-3.5" aria-hidden="true" />
                 总览
@@ -61,6 +75,20 @@ export function StockExplorer() {
               <TabsTrigger value="ai" className="gap-1.5 px-2 py-2 text-xs md:text-sm">
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                 AI
+              </TabsTrigger>
+              <TabsTrigger value="thesis" className="gap-1.5 px-2 py-2 text-xs md:text-sm">
+                <Target className="h-3.5 w-3.5" aria-hidden="true" />
+                投资逻辑
+              </TabsTrigger>
+              <TabsTrigger value="earnings" className="gap-1.5 px-2 py-2 text-xs md:text-sm">
+                <TrendingUp className="h-3.5 w-3.5" aria-hidden="true" />
+                财报前瞻
+              </TabsTrigger>
+              <TabsTrigger value="chain" className="gap-1.5 px-2 py-2 text-xs md:text-sm">
+                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                产业链
               </TabsTrigger>
             </TabsList>
           </div>
@@ -86,6 +114,18 @@ export function StockExplorer() {
 
           <TabsContent value="ai" className="mt-0">
             <InvestmentValueCard symbol={selectedStock} />
+          </TabsContent>
+
+          <TabsContent value="chain" className="mt-0">
+            <ChainPositionCard symbol={selectedStock} />
+          </TabsContent>
+
+          <TabsContent value="thesis" className="mt-0">
+            <ThesisTracker symbol={selectedStock} />
+          </TabsContent>
+
+          <TabsContent value="earnings" className="mt-0">
+            <EarningsPreview symbol={selectedStock} />
           </TabsContent>
         </Tabs>
       ) : (

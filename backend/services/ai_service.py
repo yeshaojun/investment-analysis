@@ -1,6 +1,6 @@
 """
 AI service — orchestrates LLM analysis using web search context.
-Contains prompt construction; no direct HTTP or DB calls.
+Modular: sector / financials / valuation / thesis + synthesis.
 """
 
 import logging
@@ -8,6 +8,7 @@ import time
 from typing import Dict, List
 
 from infra.providers.ai_provider import ai_provider
+from services.prompt_loader import prompt_loader
 
 logger = logging.getLogger(__name__)
 
@@ -36,11 +37,86 @@ def _fin_summary(stock_info: Dict, financial_data: List[Dict]) -> str:
     )
 
 
+def _truncate(text: str, max_chars: int = 800) -> str:
+    if len(text) <= max_chars:
+        return text
+    return text[:max_chars] + "..."
+
+
 class AIService:
+
+    # ------------------------------------------------------------------
+    # Individual analysis methods
+    # ------------------------------------------------------------------
+
+    async def analyze_sector(self, symbol: str, stock_info: Dict) -> str:
+        name = stock_info.get("name", symbol)
+        industry = stock_info.get("industry", "") or stock_info.get("sector", "")
+        web = await ai_provider.search_and_collect(
+            f"{name} {symbol} {industry} 行业分析 竞争格局 政策 2024 2025", max_pages=3
+        )
+        prompt = prompt_loader.render(
+            "sector", name=name, symbol=symbol, industry=industry or "未知"
+        )
+        return await ai_provider.call_llm(
+            [{"role": "system", "content": _SYSTEM_PROMPT},
+             {"role": "user", "content": f"{prompt}\n\n参考资料：\n{web}"}]
+        )
+
+    async def analyze_financials(self, symbol: str, stock_info: Dict,
+                                 financial_data: List[Dict]) -> str:
+        name = stock_info.get("name", symbol)
+        fin = _fin_summary(stock_info, financial_data)
+        web = await ai_provider.search_and_collect(
+            f"{name} {symbol} 财务分析 ROE 营收增长 毛利率 2024 2025", max_pages=3
+        )
+        prompt = prompt_loader.render(
+            "financials", name=name, symbol=symbol, financial_summary=fin
+        )
+        return await ai_provider.call_llm(
+            [{"role": "system", "content": _SYSTEM_PROMPT},
+             {"role": "user", "content": f"{prompt}\n\n参考资料：\n{web}"}]
+        )
+
+    async def analyze_valuation(self, symbol: str, stock_info: Dict,
+                                financial_data: List[Dict]) -> str:
+        name = stock_info.get("name", symbol)
+        fin = _fin_summary(stock_info, financial_data)
+        web = await ai_provider.search_and_collect(
+            f"{name} {symbol} 估值分析 PE PB 目标价 研报 2024 2025", max_pages=3
+        )
+        prompt = prompt_loader.render(
+            "valuation", name=name, symbol=symbol, financial_summary=fin
+        )
+        return await ai_provider.call_llm(
+            [{"role": "system", "content": _SYSTEM_PROMPT},
+             {"role": "user", "content": f"{prompt}\n\n参考资料：\n{web}"}]
+        )
+
+    async def build_thesis_analysis(self, symbol: str, stock_info: Dict,
+                                    financial_data: List[Dict]) -> str:
+        name = stock_info.get("name", symbol)
+        fin = _fin_summary(stock_info, financial_data)
+        web = await ai_provider.search_and_collect(
+            f"{name} {symbol} 投资逻辑 增长驱动 风险 评级 2024 2025", max_pages=3
+        )
+        prompt = prompt_loader.render(
+            "thesis_analysis", name=name, symbol=symbol, financial_summary=fin
+        )
+        return await ai_provider.call_llm(
+            [{"role": "system", "content": _SYSTEM_PROMPT},
+             {"role": "user", "content": f"{prompt}\n\n参考资料：\n{web}"}]
+        )
+
+    # ------------------------------------------------------------------
+    # Comprehensive analysis (5 LLM calls: 4 parallel + 1 synthesis)
+    # ------------------------------------------------------------------
 
     async def analyze_comprehensive(
         self, symbol: str, stock_info: Dict, financial_data: List[Dict]
     ) -> Dict:
+        import asyncio
+
         name = stock_info.get("name", symbol)
         industry = stock_info.get("industry", "") or stock_info.get("sector", "")
         price = stock_info.get("price", 0)
@@ -50,60 +126,113 @@ class AIService:
             "AI综合分析 start symbol=%s stock_available=%s financial_count=%d price=%s",
             symbol, stock_info.get("available", True), len(financial_data), price,
         )
-        web = await ai_provider.search_and_collect(
-            f"{name} {symbol} 行业分析 竞争力 投资价值 估值分析 研报 2024 2025", max_pages=5
+
+        # Step 1: 4 parallel analyses
+        results = await asyncio.gather(
+            self.analyze_sector(symbol, stock_info),
+            self.analyze_financials(symbol, stock_info, financial_data),
+            self.analyze_valuation(symbol, stock_info, financial_data),
+            self.build_thesis_analysis(symbol, stock_info, financial_data),
+            return_exceptions=True,
         )
-        logger.info("AI综合分析 web context ready symbol=%s chars=%d", symbol, len(web))
-        fin = _fin_summary(stock_info, financial_data)
 
-        prompt = f"""
-请对{name}（{symbol}）进行全面的投资价值分析，从以下角度综合分析：
+        dimension_names = ["行业分析", "财务分析", "估值分析", "投资逻辑"]
+        partial_failure = []
+        analyses = {}
+        for i, (name_dim, result) in enumerate(zip(dimension_names, results)):
+            if isinstance(result, Exception):
+                logger.warning("子分析失败 dimension=%s error=%s", name_dim, result)
+                partial_failure.append(name_dim)
+                analyses[name_dim] = f"[{name_dim}数据暂时不可用]"
+            else:
+                analyses[name_dim] = _truncate(result)
 
-## 一、行业分析
-1. 行业概述（定义、产业链结构）
-2. 市场规模与增长趋势
-3. 竞争格局（主要对手、集中度）
-4. 政策环境
+        # Step 2: All failed → skip synthesis
+        if len(partial_failure) == len(dimension_names):
+            elapsed_ms = int((time.perf_counter() - started) * 1000)
+            logger.error("所有分析维度均失败 symbol=%s elapsed_ms=%d", symbol, elapsed_ms)
+            return {"symbol": symbol, "name": name, "error": "所有分析维度均失败"}
 
-## 二、竞争力分析
-1. 公司市场地位（行业排名、市场份额）
-2. 核心竞争力（技术、品牌、成本优势）
-3. SWOT分析
-
-## 三、财务分析
-{fin}
-- 盈利能力、成长性、财务健康度
-
-## 四、估值分析
-- PE/PB估值、与行业均值对比、历史估值水平
-
-## 五、投资建议
-1. 核心投资逻辑与增长驱动
-2. 主要风险因素
-3. 投资评级（强烈推荐/推荐/中性/不推荐）
-4. 目标价格区间与建议持仓周期
-
-## 六、综合评分（1-10分）
-行业前景 / 竞争力 / 成长性 / 估值 / 安全边际 / 综合投资价值
-
-请用中文回答，结构清晰，数据准确，结论明确。
-"""
+        # Step 3: Synthesis (5th LLM call)
+        synthesis_prompt = prompt_loader.render(
+            "synthesis",
+            sector_analysis=analyses["行业分析"],
+            financials_analysis=analyses["财务分析"],
+            valuation_analysis=analyses["估值分析"],
+            thesis_analysis=analyses["投资逻辑"],
+        )
         try:
             analysis = await ai_provider.call_llm(
                 [{"role": "system", "content": _SYSTEM_PROMPT},
-                 {"role": "user", "content": f"{prompt}\n\n参考资料：\n{web}"}]
+                 {"role": "user", "content": synthesis_prompt}]
             )
-            elapsed_ms = int((time.perf_counter() - started) * 1000)
-            logger.info("AI综合分析 done symbol=%s chars=%d elapsed_ms=%d", symbol, len(analysis), elapsed_ms)
-            return {
-                "symbol": symbol, "name": name, "current_price": price,
-                "industry": industry, "analysis": analysis,
-                "sources": "基于网络搜索、财务数据和研报分析",
-            }
         except Exception as exc:
-            elapsed_ms = int((time.perf_counter() - started) * 1000)
-            logger.exception("AI综合分析失败 symbol=%s elapsed_ms=%d", symbol, elapsed_ms)
-            return {"symbol": symbol, "name": name, "error": str(exc)}
+            logger.error("综合叙事调用失败 symbol=%s: %s", symbol, exc)
+            analysis = "\n\n".join(v for v in analyses.values()
+                                   if v and "暂时不可用" not in v)
+
+        elapsed_ms = int((time.perf_counter() - started) * 1000)
+        logger.info(
+            "AI综合分析 done symbol=%s chars=%d elapsed_ms=%d partial_failure=%s",
+            symbol, len(analysis), elapsed_ms, partial_failure,
+        )
+        return {
+            "symbol": symbol, "name": name, "current_price": price,
+            "industry": industry, "analysis": analysis,
+            "sources": "基于网络搜索、财务数据和研报分析",
+            "partial_failure": partial_failure,
+        }
+
+    # ------------------------------------------------------------------
+    # Earnings preview
+    # ------------------------------------------------------------------
+
+    async def generate_earnings_preview(self, symbol: str, stock_info: Dict,
+                                        quarter: str) -> Dict:
+        name = stock_info.get("name", symbol)
+
+        # Try akshare analyst forecast first
+        analyst_data = ""
+        data_source = "web_search"
+        try:
+            import akshare as ak
+            df = ak.stock_analyst_forecast_em(symbol=symbol)
+            if df is not None and not df.empty:
+                analyst_data = df.to_string(index=False)
+                data_source = "analyst_forecast"
+        except Exception as exc:
+            logger.info("akshare analyst forecast unavailable for %s: %s", symbol, exc)
+
+        if data_source == "web_search":
+            web = await ai_provider.search_and_collect(
+                f"{name} {symbol} {quarter} 财报预期 分析师预测", max_pages=3
+            )
+            analyst_data = web
+
+        prompt = prompt_loader.render(
+            "earnings_preview",
+            name=name, symbol=symbol, quarter=quarter,
+            analyst_data=analyst_data,
+        )
+        try:
+            result = await ai_provider.call_llm(
+                [{"role": "system", "content": _SYSTEM_PROMPT},
+                 {"role": "user", "content": prompt}]
+            )
+        except Exception as exc:
+            logger.error("earnings preview LLM failed %s: %s", symbol, exc)
+            return {"error": str(exc), "data_source": data_source}
+
+        return {
+            "analysis": result,
+            "data_source": data_source,
+            "symbol": symbol,
+            "quarter": quarter,
+        }
+
+    # ------------------------------------------------------------------
+    # Existing: research report summary
+    # ------------------------------------------------------------------
 
     async def summarize_research_reports(
         self, symbol: str, stock_info: Dict, reports: List[Dict]
